@@ -1,0 +1,58 @@
+Step 1: Launch EC2 instance:
+
+Step 2: Login SSH:
+ssh -i "key.pem" ubuntu@ec2-54-174-44-31.compute-1.amazonaws.com
+
+Step 3: Install Docker on EC2
+sudo amazon-linux-extras install docker
+
+Step 4: Start Docker service:
+sudo service docker start
+
+Step 5: Docker Commands:
+docker images
+
+visual representation:
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+nginx               latest              e8dcbf3145f7        4 days ago          132MB
+
+Step 6: Run a Docker Container
+docker run -d -p 80:80 nginx
+
+docker ps 
+
+visual representation:
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
+hari            nginx               "nginx -g 'daemon of…"   2 minutes ago       Up 2 minutes        0.0.0.0:80->80/tcp     nginx-container
+
+Step 7: Creating Docker volume
+
+docker volume myv
+
+List Volume: 
+docker volume ls
+DRIVER              VOLUME NAME
+local               myv
+
+Step 8: List available networks:
+
+docker network ls
+
+visual representation:
+NETWORK ID          NAME                DRIVER              SCOPE
+e4c6fcb9be1a        bridge              bridge              local
+2e410adca042        host                host                local
+d0fe3cb406df        none                null                local
+
+Step 9: Remove Containers, Images, and Volumes
+
+Remove Volume: docker volume rm myv
+
+
+
+
+
+
+
+
+
