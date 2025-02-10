@@ -1,0 +1,70 @@
+===================================
+Step 1: Create a Docker file:
+===================================
+# Use the official Python image from Docker Hub
+FROM python:3.9-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the current directory contents into the container at /app
+COPY . /app
+
+# Install Flask (web framework)
+RUN pip install --no-cache-dir flask
+
+# Expose port 5000 to access the app outside the container
+EXPOSE 5000
+
+# Run the app when the container starts
+CMD ["python", "app.py"]
+
+===================================
+Step 2: Create a python file for basic detail:
+===================================
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return '''
+    <html>
+        <body>
+            <h1>Basic Details</h1>
+            <p>Name: John Doe</p>
+            <p>Occupation: Developer</p>
+            <p>Location: Somewhere on Earth</p>
+            <p>Hobbies: Coding, Reading, Gaming</p>
+        </body>
+    </html>
+    '''
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
+
+===================================
+Step 3: Build the Docker image
+===================================
+docker build -t my-website .
+
+===================================
+Step 4: Run the Docker container
+===================================
+docker run -p 5000:5000 my-website
+
+===================================
+Step 4: Accessing the website
+===================================
+http://localhost:5000
+
+===================================
+Step 5: Output file:
+===================================
+
+Basic Details
+Name: John Doe
+Occupation: Developer
+Location: Somewhere on Earth
+Hobbies: Coding, Reading, Gaming
+
