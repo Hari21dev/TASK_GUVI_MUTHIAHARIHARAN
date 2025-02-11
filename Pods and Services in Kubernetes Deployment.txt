@@ -1,0 +1,123 @@
+Pods and Services in Kubernetes Deployment:
+Step1: pod creation:
+=======================================
+POD Configuration :(saving it as .yaml)
+=======================================
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+========================================
+Step2: Creating a POD
+========================================
+kubectl apply -f nginx-pod.yaml
+
+=========================================
+Step3: check Pod status
+=========================================
+kubectl get pods
+
+=======================================================
+Step 4: Services is required to access a set of Pods ( Ngnix-pod)
+=======================================================
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
+
+saving the above as nginx-service.yaml
+==============================================================
+Step5: deploying the services
+==============================================================
+kubectl apply -f nginx-service.yaml
+
+=============================================
+Step6: Verify running status:
+=============================================
+kubectl get services
+
+=============================================
+Step7: Deployments
+=============================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 3  # Number of Pod replicas
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+
+==============================
+Step8: Create Deployment
+==============================
+kubectl apply -f nginx-deployment.yaml
+
+===============================
+Step 9: Verify Deployment
+===============================
+kubectl get deployments
+
+========================================
+step 10:Connecting Pods and Services Together
+========================================
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
+
+==============================================================
+STEP 11: Accessing the services with the assigned port number
+==============================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
