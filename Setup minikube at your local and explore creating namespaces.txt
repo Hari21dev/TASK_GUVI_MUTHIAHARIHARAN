@@ -1,0 +1,71 @@
+==================================
+Step 1: Install Minikube
+==================================
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+==================================
+Step 2: Start Minikube
+==================================
+minikube start
+
+==================================
+Step 3: Verify Minikube status
+==================================
+minikube status
+
+==================================
+Step 4: Verify cluster info 
+==================================
+kubectl cluster-info
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+Create a Namespace:
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+
+==================================
+Step 1: To create a namespace
+==================================
+kubectl create namespace my-namespace
+
+==================================
+Step 2:  To Verify a namespace
+==================================
+kubectl get namespaces
+
+==================================
+Step 3: using the namespace
+==================================
+kubectl run nginx-pod --image=nginx -n my-namespace
+
+========================================================
+Step 4: To verify the Pod is created in my-namespace:
+========================================================
+kubectl get pods -n my-namespace
+
+==================================
+Step 5: Switch Between Namespaces
+==================================
+kubectl config set-context --current --namespace=my-namespace
+
+==================================
+Step 6: Delete a Namespace
+==================================
+kubectl delete namespace my-namespace
+
+==================================
+Step 7: To list the namespaces
+==================================
+kubectl get namespaces
+
+
+
+
+
+
+
+
+
+
+
