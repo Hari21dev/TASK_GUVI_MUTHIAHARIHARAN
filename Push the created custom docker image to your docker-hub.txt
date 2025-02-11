@@ -1,0 +1,75 @@
+===========================================
+Step 1: Create a Directory for the Docker Setup
+===========================================
+mkdir custom-nginx-docker
+cd custom-nginx-docker
+
+===========================================
+Step2: Creating a docker file:
+===========================================
+
+# Dockerfile
+
+# official Nginx image
+FROM nginx:latest
+
+# Expose Nginx port
+EXPOSE 80
+
+# Create  volume
+RUN mkdir -p /var/opt/nginx
+
+# working directory
+WORKDIR /var/opt/nginx
+
+# Starting the Nginx service
+CMD ["nginx", "-g", "daemon off;"]
+
+===========================================
+Step3: Create a docker compose file.yaml
+===========================================
+version: "3.8"
+
+services:
+  nginx:
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - /var/opt/nginx
+    container_name: custom-nginx
+===========================================
+Step4: Building a docker image:
+===========================================
+docker-compose build
+
+===========================================
+Step5:Verify the Image
+===========================================
+docker images
+
+===========================================
+Step 5: Run the Docker Application
+===========================================
+docker-compose up -d
+
+===========================================
+step 6: Verify which containers are running
+===========================================
+docker ps
+
+===========================================
+step 7: Access the server using the correct open port number
+===========================================
+
+===========================================
+Step 8: tagging the image
+===========================================
+docker tag custom-nginx:latest hari210998/custom-nginx:latest
+
+===========================================
+Step 9: Pushing the Image
+===========================================
+docker push hari210998/custom-nginx:latest
+
+
